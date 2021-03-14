@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Nota">
+
+    <EditText
+        android:id="@+id/edtxtTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="Título"
+        android:ems="15"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/grey"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtdescription"
+        android:text="@string/description"
+        android:layout_below="@+id/edtxtTitulo"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="40dp"
+        android:textSize="15sp"
+        android:textColor="@color/grey"/>
+
+    <EditText
+        android:id="@+id/edtxtDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtdescription"
+        android:layout_marginTop="20dp"
+        android:inputType="textMultiLine"
+        android:overScrollMode="always"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
+        android:background="@drawable/border"
+        android:scrollHorizontally="false"
+        android:lines="20"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtxtDescription"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:text="@string/guardar"
+            app:backgroundTint="@color/Secondary" />
+
+        <Button
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:text="@string/eliminar"
+            app:backgroundTint="@color/delete" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
