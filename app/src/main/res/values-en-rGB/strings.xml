@@ -9,4 +9,5 @@
     <string name="description">Description</string>
     <string name="guardar">Keep Changes</string>
     <string name="eliminar">Delete Note</string>
+    <string name="adicionarNota">Add Note</string>
 </resources>

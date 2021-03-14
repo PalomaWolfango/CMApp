@@ -12,8 +12,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun btnIrNotas(view: View) {
-        val intent = Intent(this, Nota::class.java).apply {
-        }
+        val intent = Intent(this, Lista_Notas::class.java).apply {}
         startActivity(intent)
     }
 }
