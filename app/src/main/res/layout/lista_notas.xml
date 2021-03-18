@@ -11,17 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/recyclerline"
-        app:layout_constraintBottom_toTopOf="parent">
+        tools:listitem="@layout/recyclerview_item"
+        app:layout_constraintBottom_toTopOf="parent"
+        android:scrollbarThumbVertical="@color/Primary"
+        android:scrollbarSize="10dp">
     </androidx.recyclerview.widget.RecyclerView>
 
-    <Button
-        android:layout_width="match_parent"
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/adicionar_nota"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        app:backgroundTint="@color/Primary"
         android:layout_alignParentBottom="true"
-        android:layout_margin="15dp"
-        android:text="@string/adicionarNota">
-    </Button>
+        app:srcCompat="@drawable/ic_add"
+        tools:ignore="VectorDrawableCompat"
+        android:layout_margin="30dp"/>
 
 
 

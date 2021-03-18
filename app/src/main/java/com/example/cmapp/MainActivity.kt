@@ -15,4 +15,10 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, Lista_Notas::class.java).apply {}
         startActivity(intent)
     }
+
+    fun semRegisto(view: View) {
+        val intent = Intent(this, Registo::class.java).apply {}
+        startActivity(intent)
+    }
+
 }

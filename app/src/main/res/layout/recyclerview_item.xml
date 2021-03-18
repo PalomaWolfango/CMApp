@@ -2,7 +2,9 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:onClick="alterarNota">
 
     <TextView
         android:id="@+id/titulo"
@@ -22,13 +24,4 @@
         android:layout_height="wrap_content">
     </TextView>
 
-    <TextView
-        android:id="@+id/data"
-        android:text="14/03/2021"
-        android:layout_alignTop="@id/titulo"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </TextView>
 </RelativeLayout>

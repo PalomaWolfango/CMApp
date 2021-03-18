@@ -57,7 +57,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/textView10"
+            android:id="@+id/btnGuardarNota"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
@@ -66,7 +66,7 @@
             app:backgroundTint="@color/Secondary" />
 
         <Button
-            android:id="@+id/textView11"
+            android:id="@+id/btnEliminarNota"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"

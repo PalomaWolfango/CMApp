@@ -9,4 +9,9 @@
     <string name="guardar">Guardar Alterações</string>
     <string name="eliminar">Eliminar Nota</string>
     <string name="adicionarNota">Adicionar Nota</string>
+    <string name="registo">Registo</string>
+    <string name="nome">Nome</string>
+    <string name="passwordCheck">Confirmar Password</string>
+    <string name="registar">Registar</string>
+    <string name="notSaved">Não Guardado!</string>
 </resources>
