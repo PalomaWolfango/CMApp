@@ -3,7 +3,7 @@ package com.example.cmapp
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -25,7 +25,7 @@ class Lista_Notas : AppCompatActivity() {
 
         // recycler view
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        val adapter = NotaAdapter(this)
+        val adapter = NotaAdapter(this, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -36,17 +36,16 @@ class Lista_Notas : AppCompatActivity() {
         })
 
         recyclerView.setOnClickListener{
-            val intent = Intent(this@Lista_Notas, Nota::class.java)
+            val intent = Intent(this@Lista_Notas, AdicionarNota::class.java)
             startActivityForResult(intent, newNotaActivityRequestCode)
         }
 
         //Fab
         val fab = findViewById<FloatingActionButton>(R.id.adicionar_nota)
         fab.setOnClickListener {
-            val intent = Intent(this@Lista_Notas, Nota::class.java)
+            val intent = Intent(this@Lista_Notas, AdicionarNota::class.java)
             startActivityForResult(intent, newNotaActivityRequestCode)
         }
-
 
     }
 
@@ -54,8 +53,8 @@ class Lista_Notas : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == newNotaActivityRequestCode && resultCode == Activity.RESULT_OK) {
-            val ptitulo = data?.getStringExtra(Nota.EXTRA_REPLY_TITULO)
-            val pdescricao = data?.getStringExtra(Nota.EXTRA_REPLY_DESCRICAO)
+            val ptitulo = data?.getStringExtra(AdicionarNota.EXTRA_REPLY_TITULO)
+            val pdescricao = data?.getStringExtra(AdicionarNota.EXTRA_REPLY_DESCRICAO)
 
             if (ptitulo!= null && pdescricao != null) {
                 val nota = com.example.cmapp.entities.Nota(titulo = ptitulo, descricao = pdescricao)
@@ -68,6 +67,10 @@ class Lista_Notas : AppCompatActivity() {
                 R.string.notSaved,
                 Toast.LENGTH_LONG).show()
         }
+    }
+
+    fun delete(id : Int?){
+        notaViewModel.deleteByNotaId(id)
     }
 
 }

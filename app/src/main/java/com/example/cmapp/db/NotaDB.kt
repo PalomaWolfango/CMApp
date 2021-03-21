@@ -29,11 +29,11 @@ public abstract class NotaDB : RoomDatabase() {
                     //notaDao.deleteAll()
 
                     // Add sample cities.
-                    /*var nota = Nota(1, "Nota 1", "Descrição 1")
+                    /*var nota = AdicionarNota(1, "AdicionarNota 1", "Descrição 1")
                     notaDao.insert(nota)
-                    nota = Nota(2, "Nota 2", "Descrição 1")
+                    nota = AdicionarNota(2, "AdicionarNota 2", "Descrição 1")
                     notaDao.insert(nota)
-                    nota = Nota(3, "Nota 3", "Descrição 1")
+                    nota = AdicionarNota(3, "AdicionarNota 3", "Descrição 1")
                     notaDao.insert(nota)
 */
                 }
@@ -59,7 +59,7 @@ public abstract class NotaDB : RoomDatabase() {
                     "notas_database"
                 )
                     //estratégia de destruição
-                    .fallbackToDestructiveMigration()
+                    //.fallbackToDestructiveMigration()
                     .addCallback(NotaDatabaseCallback(scope))
                     .build()
 

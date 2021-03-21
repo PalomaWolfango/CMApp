@@ -1,10 +1,7 @@
 package com.example.cmapp.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.cmapp.entities.Nota
 
 @Dao
@@ -16,11 +13,11 @@ interface NotaDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(nota: Nota)
 
-    @Query("UPDATE nota_table SET titulo=:titulo AND descricao=:descricao WHERE id == :id")
-    suspend fun updateNota(titulo: String, descricao: String, id: Int)
+    @Update
+    suspend fun updateNota(nota: Nota)
 
     @Query("DELETE FROM nota_table WHERE id == :id")
-    suspend fun deleteByNotaId(id: Int)
+    suspend fun deleteByNotaId(id: Int?)
 
     @Query("DELETE FROM nota_table")
     suspend fun deleteAll()

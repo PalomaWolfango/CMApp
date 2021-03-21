@@ -8,14 +8,14 @@ import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 
-class Nota : AppCompatActivity() {
+class AdicionarNota : AppCompatActivity() {
 
     private lateinit var tituloText: EditText
     private lateinit var descricaoText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_nota)
+        setContentView(R.layout.activity_adicionarnota)
 
         tituloText = findViewById(R.id.edtxtTitulo)
         descricaoText = findViewById(R.id.edtxtDescription)
@@ -33,18 +33,6 @@ class Nota : AppCompatActivity() {
             finish()
         }
 
-        /*val buttonEliminar = findViewById<Button>(R.id.btnGuardarNota)
-        buttonEliminar.setOnClickListener {
-            val replyIntent = Intent()
-            if (TextUtils.isEmpty(tituloText.text) && TextUtils.isEmpty(descricaoText.text)) {
-                setResult(Activity.RESULT_CANCELED, replyIntent)
-            } else {
-                replyIntent.putExtra(EXTRA_REPLY_TITULO, tituloText.text.toString())
-                replyIntent.putExtra(EXTRA_REPLY_DESCRICAO, descricaoText.text.toString())
-                setResult(Activity.RESULT_OK, replyIntent)
-            }
-            finish()
-        }*/
 
     }
     companion object {

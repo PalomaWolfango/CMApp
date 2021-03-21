@@ -7,13 +7,12 @@
     <string name="notas">Notes</string>
     <string name="linkRegisto">Not Registered?</string>
     <string name="description">Description</string>
-    <string name="guardar">Keep Changes</string>
+    <string name="guardar">Save Changes</string>
     <string name="eliminar">Delete Note</string>
     <string name="adicionarNota">Add Note</string>
     <string name="registo">Register</string>
     <string name="nome">Name</string>
     <string name="passwordCheck">Confirm Password</string>
     <string name="registar">Register</string>
-    <string name="notSaves">No Saved!</string>
     <string name="notSaved">Not Saved!</string>
 </resources>
