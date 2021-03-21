@@ -8,7 +8,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".AdicionarNota"
-    android:scrollbarThumbVertical="@color/Primary">
+    android:scrollbarThumbVertical="@color/Primary"
+    android:scrollbars="vertical">
 
     <EditText
         android:id="@+id/edtxtTitulo"
@@ -47,7 +48,9 @@
         android:overScrollMode="always"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
-        android:scrollHorizontally="false" />
+        android:scrollHorizontally="false"
+        android:textAlignment="textStart"
+        android:gravity="start" />
 
     <LinearLayout
         android:layout_width="match_parent"

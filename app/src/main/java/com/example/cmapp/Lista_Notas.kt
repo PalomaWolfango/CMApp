@@ -3,7 +3,7 @@ package com.example.cmapp
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageButton
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -71,6 +71,11 @@ class Lista_Notas : AppCompatActivity() {
 
     fun delete(id : Int?){
         notaViewModel.deleteByNotaId(id)
+    }
+
+    fun AlterarNota(view: View) {
+        val intent = Intent(this, EditarNota::class.java).apply {}
+        startActivity(intent)
     }
 
 }

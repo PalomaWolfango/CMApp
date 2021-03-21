@@ -5,7 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="15dp"
-    android:background="@drawable/border">
+    android:background="@drawable/border"
+    android:onClick="AlterarNota"
+    android:id="@+id/AlterarNota">
 
     <TextView
         android:id="@+id/titulo"
@@ -20,8 +22,7 @@
         android:text="Titulo 1"
         android:textAllCaps="true"
         android:textColor="@color/Primary"
-        android:textStyle="bold"
-        android:onClick="AlterarNota"/>
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/descricaoNota"

@@ -24,7 +24,21 @@ class AdicionarNota : AppCompatActivity() {
         buttonGuardar.setOnClickListener {
             val replyIntent = Intent()
             if (TextUtils.isEmpty(tituloText.text) && TextUtils.isEmpty(descricaoText.text)) {
-                setResult(Activity.RESULT_CANCELED, replyIntent)
+                //setResult(Activity.RESULT_CANCELED, replyIntent)
+
+                if (TextUtils.isEmpty((tituloText.text))) {
+                    tituloText.error = getString(R.string.tituloMessage)
+                }
+
+                if (TextUtils.isEmpty((descricaoText.text))) {
+                    descricaoText.error = getString(R.string.DescMessage)
+                }
+
+                if (TextUtils.isEmpty((tituloText.text)) && TextUtils.isEmpty((descricaoText.text))) {
+                    tituloText.error = getString(R.string.tituloMessage)
+                    descricaoText.error = getString(R.string.DescMessage)
+                }
+
             } else {
                 replyIntent.putExtra(EXTRA_REPLY_TITULO, tituloText.text.toString())
                 replyIntent.putExtra(EXTRA_REPLY_DESCRICAO, descricaoText.text.toString())
@@ -39,4 +53,5 @@ class AdicionarNota : AppCompatActivity() {
         const val EXTRA_REPLY_TITULO = "com.example.android.titulo"
         const val EXTRA_REPLY_DESCRICAO = "com.example.android.descricao"
     }
+
 }

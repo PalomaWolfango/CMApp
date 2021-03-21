@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AdicionarNota"
+    tools:context=".EditarNota"
     android:scrollbarThumbVertical="@color/Primary">
 
     <EditText
@@ -47,7 +47,9 @@
         android:overScrollMode="always"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"
-        android:scrollHorizontally="false" />
+        android:scrollHorizontally="false"
+        android:textAlignment="textStart"
+        android:gravity="start"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,7 +67,8 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:text="@string/guardar"
-            app:backgroundTint="@color/Secondary" />
+            app:backgroundTint="@color/Secondary"
+            android:onClick="updateNota"/>
 
     </LinearLayout>
 

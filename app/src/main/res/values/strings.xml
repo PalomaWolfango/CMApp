@@ -14,4 +14,6 @@
     <string name="passwordCheck">Confirmar Password</string>
     <string name="registar">Registar</string>
     <string name="notSaved">Não Guardado!</string>
+    <string name="tituloMessage">Preencha um título!</string>
+    <string name="DescMessage">Preencha uma descrição!</string>
 </resources>
