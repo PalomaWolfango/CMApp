@@ -5,7 +5,8 @@
     <string name="entrar">Entrar</string>
     <string name="notas">Notas</string>
     <string name="linkRegisto">Ainda sem Registo?</string>
-    <string name="description">Descrição</string>
+    <string name="title">TÍTULO</string>
+    <string name="description">DESCRIÇÃO</string>
     <string name="guardar">Guardar Alterações</string>
     <string name="eliminar">Eliminar Nota</string>
     <string name="adicionarNota">Adicionar Nota</string>
@@ -16,4 +17,9 @@
     <string name="notSaved">Não Guardado!</string>
     <string name="tituloMessage">Preencha um título!</string>
     <string name="DescMessage">Preencha uma descrição!</string>
+    <string name="emptyRecycler">Sem Notas</string>
+    <string name="eliminadoSucesso">Eliminado com sucesso!</string>
+    <string name="alteradoSucesso">Alterado com sucesso!</string>
+    <string name="adcionadoSucesso">Adicionada com sucesso!</string>
+
 </resources>

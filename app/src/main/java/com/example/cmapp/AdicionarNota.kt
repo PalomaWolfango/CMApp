@@ -22,28 +22,32 @@ class AdicionarNota : AppCompatActivity() {
 
         val buttonGuardar = findViewById<Button>(R.id.btnGuardarNota)
         buttonGuardar.setOnClickListener {
-            val replyIntent = Intent()
-            if (TextUtils.isEmpty(tituloText.text) && TextUtils.isEmpty(descricaoText.text)) {
-                //setResult(Activity.RESULT_CANCELED, replyIntent)
 
-                if (TextUtils.isEmpty((tituloText.text))) {
+            if (TextUtils.isEmpty((tituloText.text)) || TextUtils.isEmpty((descricaoText.text))) {
+
+                if (TextUtils.isEmpty(tituloText.text) && !TextUtils.isEmpty(descricaoText.text)) {
                     tituloText.error = getString(R.string.tituloMessage)
                 }
 
-                if (TextUtils.isEmpty((descricaoText.text))) {
+                if (!TextUtils.isEmpty(descricaoText.text) && TextUtils.isEmpty(descricaoText.text)) {
                     descricaoText.error = getString(R.string.DescMessage)
                 }
 
-                if (TextUtils.isEmpty((tituloText.text)) && TextUtils.isEmpty((descricaoText.text))) {
+                if (TextUtils.isEmpty(tituloText.text) && TextUtils.isEmpty(descricaoText.text)) {
                     tituloText.error = getString(R.string.tituloMessage)
                     descricaoText.error = getString(R.string.DescMessage)
                 }
 
-            } else {
+            }
+
+            else {
+                val replyIntent = Intent()
+
                 replyIntent.putExtra(EXTRA_REPLY_TITULO, tituloText.text.toString())
                 replyIntent.putExtra(EXTRA_REPLY_DESCRICAO, descricaoText.text.toString())
                 setResult(Activity.RESULT_OK, replyIntent)
             }
+
             finish()
         }
 

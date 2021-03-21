@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.cmapp.adapters.Descricao
 import com.example.cmapp.adapters.ID
@@ -61,6 +62,12 @@ class EditarNota : AppCompatActivity() {
                 descricao = description.text.toString()
             )
             notaViewModel.updateNota(nota)
+
+            Toast.makeText(
+                applicationContext,
+                R.string.alteradoSucesso,
+                Toast.LENGTH_SHORT).show()
+
             finish()
         }
 

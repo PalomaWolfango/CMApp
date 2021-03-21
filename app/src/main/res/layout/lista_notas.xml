@@ -25,9 +25,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:clickable="true"
-        app:backgroundTint="@color/Primary"
         android:layout_alignParentBottom="true"
         app:srcCompat="@drawable/ic_add"
+        tools:ignore="VectorDrawableCompat"
+        android:layout_margin="30dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/eliminarNotas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:clickable="true"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/ic_baseline_delete_forever_24"
         tools:ignore="VectorDrawableCompat"
         android:layout_margin="30dp"/>
 

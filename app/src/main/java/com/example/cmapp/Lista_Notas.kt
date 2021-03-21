@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cmapp.adapters.NotaAdapter
 import com.example.cmapp.viewModel.NotaViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.lista_notas.*
 
 class Lista_Notas : AppCompatActivity() {
 
@@ -28,6 +29,7 @@ class Lista_Notas : AppCompatActivity() {
         val adapter = NotaAdapter(this, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+
 
         // view model
         notaViewModel = ViewModelProvider(this).get(NotaViewModel::class.java)
@@ -47,6 +49,16 @@ class Lista_Notas : AppCompatActivity() {
             startActivityForResult(intent, newNotaActivityRequestCode)
         }
 
+        val fabEliminarAllNotas = findViewById<FloatingActionButton>(R.id.eliminarNotas)
+        fabEliminarAllNotas.setOnClickListener {
+            notaViewModel.deleteAll()
+            Toast.makeText(
+                applicationContext,
+                R.string.eliminadoSucesso,
+                Toast.LENGTH_SHORT).show()
+        }
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -65,15 +77,21 @@ class Lista_Notas : AppCompatActivity() {
             Toast.makeText(
                 applicationContext,
                 R.string.notSaved,
-                Toast.LENGTH_LONG).show()
+                Toast.LENGTH_SHORT).show()
         }
+
+
     }
 
     fun delete(id : Int?){
         notaViewModel.deleteByNotaId(id)
+        Toast.makeText(
+            applicationContext,
+            R.string.eliminadoSucesso,
+            Toast.LENGTH_SHORT).show()
     }
 
-    fun AlterarNota(view: View) {
+    fun AlterarNota() {
         val intent = Intent(this, EditarNota::class.java).apply {}
         startActivity(intent)
     }

@@ -15,24 +15,26 @@
         android:id="@+id/edtxtTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="Título"
-        android:ems="15"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:textColor="@color/grey"/>
+        android:inputType="text"
+        android:ems="14"
+        android:hint="@string/title"
+        android:textAllCaps="true"
+        android:textColor="@color/Primary"
+        android:textStyle="bold" />
 
 
     <TextView
+        android:id="@+id/txtdescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtdescription"
-        android:text="@string/description"
         android:layout_below="@+id/edtxtTitulo"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="40dp"
-        android:textSize="15sp"
-        android:textColor="@color/grey"/>
+        android:text="@string/description"
+        android:textAllCaps="true"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/edtxtDescription"
@@ -44,7 +46,7 @@
         android:layout_marginRight="50dp"
         android:background="@drawable/border"
         android:inputType="textMultiLine|textImeMultiLine"
-        android:lines="20"
+        android:lines="18"
         android:overScrollMode="always"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"

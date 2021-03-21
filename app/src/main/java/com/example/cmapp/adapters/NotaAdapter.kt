@@ -39,6 +39,7 @@ class NotaAdapter internal constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotaViewHolder {
         val itemView = inflater.inflate(R.layout.recyclerview_item, parent, false)
         return NotaViewHolder(itemView)
+
     }
 
     override fun onBindViewHolder(holder: NotaViewHolder, position: Int) {
