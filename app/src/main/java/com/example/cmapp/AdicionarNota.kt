@@ -20,35 +20,35 @@ class AdicionarNota : AppCompatActivity() {
         tituloText = findViewById(R.id.edtxtTitulo)
         descricaoText = findViewById(R.id.edtxtDescription)
 
-        val buttonGuardar = findViewById<Button>(R.id.btnGuardarNota)
-        buttonGuardar.setOnClickListener {
+        if(intent.getStringExtra(EXTRA_REPLY_TITULO).isNullOrEmpty() && intent.getStringExtra(EXTRA_REPLY_DESCRICAO).isNullOrEmpty()){
 
-            if (TextUtils.isEmpty((tituloText.text)) || TextUtils.isEmpty((descricaoText.text))) {
+            val buttonGuardar = findViewById<Button>(R.id.btnGuardarNota)
+            buttonGuardar.setOnClickListener {
 
-                if (TextUtils.isEmpty(tituloText.text) && !TextUtils.isEmpty(descricaoText.text)) {
-                    tituloText.error = getString(R.string.tituloMessage)
+                if (TextUtils.isEmpty((tituloText.text)) || TextUtils.isEmpty((descricaoText.text))) {
+
+                    if (TextUtils.isEmpty(tituloText.text) && !TextUtils.isEmpty(descricaoText.text)) {
+                        tituloText.error = getString(R.string.tituloMessage)
+                    }
+
+                    if (!TextUtils.isEmpty(descricaoText.text) && TextUtils.isEmpty(descricaoText.text)) {
+                        descricaoText.error = getString(R.string.DescMessage)
+                    }
+
+                    if (TextUtils.isEmpty(tituloText.text) && TextUtils.isEmpty(descricaoText.text)) {
+                        tituloText.error = getString(R.string.tituloMessage)
+                        descricaoText.error = getString(R.string.DescMessage)
+                    }
+
+                } else {
+                    val replyIntent = Intent()
+
+                    replyIntent.putExtra(EXTRA_REPLY_TITULO, tituloText.text.toString())
+                    replyIntent.putExtra(EXTRA_REPLY_DESCRICAO, descricaoText.text.toString())
+                    setResult(Activity.RESULT_OK, replyIntent)
+                    finish()
                 }
-
-                if (!TextUtils.isEmpty(descricaoText.text) && TextUtils.isEmpty(descricaoText.text)) {
-                    descricaoText.error = getString(R.string.DescMessage)
-                }
-
-                if (TextUtils.isEmpty(tituloText.text) && TextUtils.isEmpty(descricaoText.text)) {
-                    tituloText.error = getString(R.string.tituloMessage)
-                    descricaoText.error = getString(R.string.DescMessage)
-                }
-
             }
-
-            else {
-                val replyIntent = Intent()
-
-                replyIntent.putExtra(EXTRA_REPLY_TITULO, tituloText.text.toString())
-                replyIntent.putExtra(EXTRA_REPLY_DESCRICAO, descricaoText.text.toString())
-                setResult(Activity.RESULT_OK, replyIntent)
-            }
-
-            finish()
         }
 
 

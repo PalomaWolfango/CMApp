@@ -3,6 +3,7 @@ package com.example.cmapp
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -73,13 +74,7 @@ class Lista_Notas : AppCompatActivity() {
                 notaViewModel.insert(nota)
             }
 
-        } else {
-            Toast.makeText(
-                applicationContext,
-                R.string.notSaved,
-                Toast.LENGTH_SHORT).show()
         }
-
 
     }
 

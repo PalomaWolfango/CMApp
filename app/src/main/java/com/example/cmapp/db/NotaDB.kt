@@ -59,7 +59,7 @@ public abstract class NotaDB : RoomDatabase() {
                     "notas_database"
                 )
                     //estratégia de destruição
-                    .fallbackToDestructiveMigration()
+                    //.fallbackToDestructiveMigration()
                     .addCallback(NotaDatabaseCallback(scope))
                     .build()
 
