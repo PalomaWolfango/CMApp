@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CMApp</string>
+    <string name="welcome">Welcome!</string>
+    <string name="login">Login</string>
+    <string name="entrar">Enter</string>
+    <string name="notas">Notes</string>
+    <string name="linkRegisto">Not Registered?</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="guardar">Save Changes</string>
+    <string name="eliminar">Delete Note</string>
+    <string name="adicionarNota">Add Note</string>
+    <string name="registo">Register</string>
+    <string name="nome">Name</string>
+    <string name="passwordCheck">Confirm Password</string>
+    <string name="registar">Register</string>
+    <string name="notSaved">Not Saved!</string>
+    <string name="tituloMessage">Fill in a title!</string>
+    <string name="DescMessage">Fill in a description!</string>
+    <string name="title">TITLE</string>
+    <string name="emptyRecycler">No notes</string>
+    <string name="eliminadoSucesso">Successfully deleted!</string>
+    <string name="alteradoSucesso">Successfully changed!</string>
+    <string name="adcionadoSucesso">Successfully added!</string>
+</resources>

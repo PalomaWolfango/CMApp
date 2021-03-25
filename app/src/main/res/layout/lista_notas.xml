@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Lista_Notas">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/recyclerview_item"
+        app:layout_constraintBottom_toTopOf="parent"
+        android:scrollbarThumbVertical="@color/Primary"
+        android:scrollbarSize="10dp">
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/adicionar_nota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/ic_add"
+        tools:ignore="VectorDrawableCompat"
+        android:layout_margin="30dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/eliminarNotas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:clickable="true"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/ic_baseline_delete_forever_24"
+        tools:ignore="VectorDrawableCompat"
+        android:layout_margin="30dp"/>
+
+</RelativeLayout>

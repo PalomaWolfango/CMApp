@@ -1,53 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".Registo">
 
     <TextView
-        android:id="@+id/texto1"
-        style="@style/textoInicial"
-        android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/alex_brush"
-        android:text="@string/welcome" />
-
-    <TextView
-        android:id="@+id/txtLogin"
+        android:id="@+id/txtRegisto"
         style="@style/textoLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:layout_below="@+id/texto1"
-        android:layout_marginTop="50dp"
-        android:text="@string/login"
+        android:layout_marginTop="70dp"
+        android:text="@string/registo"
         android:gravity="center_horizontal" />
 
     <EditText
-        android:id="@+id/edtxtUsername"
+        android:id="@+id/edtxtNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/nome"
+        android:ems="15"
+        android:layout_below="@+id/txtRegisto"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
+
+    <EditText
+        android:id="@+id/edtxtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="Email"
         android:ems="15"
-        android:layout_below="@+id/txtLogin"
+        android:layout_below="@+id/edtxtNome"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="20dp" />
 
     <EditText
-        android:id="@+id/edtxtPassword"
+        android:id="@+id/edtxtPwd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="Password"
         android:ems="15"
-        android:layout_below="@+id/edtxtUsername"
+        android:layout_below="@+id/edtxtEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        android:id="@+id/edtxtPwdCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="@string/passwordCheck"
+        android:ems="15"
+        android:layout_below="@+id/edtxtPwd"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
 
@@ -55,10 +65,10 @@
         android:id="@+id/btnLogin"
         android:layout_width="@dimen/DP01"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edtxtPassword"
+        android:layout_below="@+id/edtxtPwdCheck"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:text="@string/entrar"/>
+        android:text="@string/registar"/>
 
     <TextView
         style="@style/textoLogin"
@@ -67,24 +77,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnLogin"
         android:layout_centerHorizontal="true"
-        android:text="@string/linkRegisto"
+        android:text="@string/login"
         android:layout_marginTop="15dp"
         android:textSize="15dp"
         android:textColor="@color/Secondary"
         android:clickable="true"
-        android:onClick="semRegisto"/>
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/adicionar_carrinho"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="30dp"
-        android:clickable="true"
-        android:onClick="btnIrNotas"
-        tools:ignore="VectorDrawableCompat"
-        app:srcCompat="@drawable/ic_notes"/>
+        android:onClick="irLogin"/>
 
 </RelativeLayout>
