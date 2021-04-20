@@ -46,7 +46,7 @@
         android:layout_marginRight="50dp"
         android:background="@drawable/border"
         android:inputType="textMultiLine|textImeMultiLine"
-        android:lines="18"
+        android:lines="14"
         android:overScrollMode="always"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical"

@@ -21,5 +21,6 @@
     <string name="eliminadoSucesso">Eliminado com sucesso!</string>
     <string name="alteradoSucesso">Alterado com sucesso!</string>
     <string name="adcionadoSucesso">Adicionada com sucesso!</string>
+    <string name="title_activity_mapa">Map</string>
 
 </resources>
