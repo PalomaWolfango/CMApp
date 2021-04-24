@@ -21,4 +21,9 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun Entrar(view: View) {
+        val intent = Intent(this, MapaActivity::class.java).apply {}
+        startActivity(intent)
+    }
+
 }

@@ -58,7 +58,8 @@
         android:layout_below="@+id/edtxtPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:text="@string/entrar"/>
+        android:text="@string/entrar"
+        android:onClick="Entrar"/>
 
     <TextView
         style="@style/textoLogin"

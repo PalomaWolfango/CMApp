@@ -3,10 +3,12 @@ package com.example.cmapp.api
 import retrofit2.http.*
 
 interface EndPoints {
+
     @FormUrlEncoded
     @POST("verificaruser")
     fun verifyUsers(@Field("username")username:String, @Field("password")password:String): retrofit2.Call<User>
 
+    //teste
     @GET("users/anomalias")
     fun getAllAnomalias(): retrofit2.Call<List<Markers>>
 
