@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    //Botão após o login, direciona-nos para o mapa
     fun Entrar(view: View) {
         val intent = Intent(this, MapaActivity::class.java).apply {}
         startActivity(intent)
