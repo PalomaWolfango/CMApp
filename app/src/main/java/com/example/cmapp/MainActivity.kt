@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+
+    //Botão para aceder às notas
     fun btnIrNotas(view: View) {
         val intent = Intent(this, Lista_Notas::class.java).apply {}
         startActivity(intent)
