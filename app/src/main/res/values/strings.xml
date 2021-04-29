@@ -26,5 +26,10 @@
     <string name="logado">logged</string>
     <string name="username" translatable="false">username</string>
     <string name="id" translatable="false">id</string>
+    <string name="erroUsername">Username inválido</string>
+    <string name="erroPassword">Password Inválida</string>
+    <string name="sessaoTerminada">Sessão Terminada!</string>
+    <string name="loginIncorreto">Login Incorreto!</string>
+
 
 </resources>

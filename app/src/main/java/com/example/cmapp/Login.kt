@@ -26,9 +26,27 @@ class Login : AppCompatActivity() {
         entrar.setOnClickListener{
             val edtxtUsername = findViewById<EditText>(R.id.edtxtUsername)
             val edtxtPassword = findViewById<EditText>(R.id.edtxtPassword)
+
+            //Retirar espaços que poderão existir
             val username = edtxtUsername.text.toString().trim()
             val password = edtxtPassword.text.toString().trim()
 
+            //Verificação se os campos do login são preenchidos corretamente
+            if(edtxtUsername.text.isNullOrEmpty() || edtxtPassword.text.isNullOrEmpty()){
+
+                if(edtxtUsername.text.isNullOrEmpty() && !edtxtPassword.text.isNullOrEmpty()){
+                    edtxtUsername.error = getString(R.string.erroUsername)
+                }
+                if(!edtxtUsername.text.isNullOrEmpty() && edtxtPassword.text.isNullOrEmpty()){
+                    edtxtPassword.error = getString(R.string.erroPassword)
+                }
+                if(edtxtUsername.text.isNullOrEmpty() && edtxtPassword.text.isNullOrEmpty()){
+                    edtxtUsername.error = getString(R.string.erroUsername)
+                    edtxtPassword.error = getString(R.string.erroPassword)
+                }
+            }
+
+            //Associação dos endpoints ao web server
             val request = ServiceBuilder.buildService(EndPoints::class.java)
             val call = request.verificarUser(username = username, password = password)
 
@@ -40,6 +58,8 @@ class Login : AppCompatActivity() {
                         val intent = Intent(this@Login, MapaActivity::class.java)
                         startActivity(intent)
                         finish()
+
+                        //Guardar a informação no SharedPreferences
                         val sessionAutomatica: SharedPreferences = getSharedPreferences(
                             getString(R.string.SP),
                             Context.MODE_PRIVATE
@@ -56,7 +76,8 @@ class Login : AppCompatActivity() {
                     }
                 }
                 override fun onFailure(call: Call<User>, t: Throwable) {
-                    Toast.makeText(this@Login, "Login Errado!", Toast.LENGTH_SHORT).show()
+                    //Toast se o login estiver incorreto
+                    Toast.makeText(this@Login, getString(R.string.loginIncorreto), Toast.LENGTH_SHORT).show()
                 }
             })
         }

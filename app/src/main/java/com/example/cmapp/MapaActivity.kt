@@ -50,7 +50,6 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         //Botão de terminar sessão
         val terminarSessao = findViewById<FloatingActionButton>(R.id.terminarSessao)
         terminarSessao.setOnClickListener {
-
             val sessionAutomatica: SharedPreferences = getSharedPreferences(
                 getString(R.string.SP),
                 Context.MODE_PRIVATE
@@ -60,7 +59,8 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                 apply()
             }
 
-            Toast.makeText(this@MapaActivity, "Sessão Terminada!", Toast.LENGTH_SHORT).show()
+            //Toast que aparece após término da sessão
+            Toast.makeText(this@MapaActivity, getString(R.string.sessaoTerminada), Toast.LENGTH_SHORT).show()
 
             val intent = Intent(this@MapaActivity, Login::class.java)
             startActivity(intent)
