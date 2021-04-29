@@ -2,6 +2,9 @@ package com.example.cmapp
 
 
 import android.Manifest
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -9,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -17,7 +19,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import android.util.Log
+import android.widget.Toast
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -34,12 +38,34 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mapa)
+        supportActionBar?.hide()
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        //Botão de terminar sessão
+        val terminarSessao = findViewById<FloatingActionButton>(R.id.terminarSessao)
+        terminarSessao.setOnClickListener {
+
+            val sessionAutomatica: SharedPreferences = getSharedPreferences(
+                getString(R.string.SP),
+                Context.MODE_PRIVATE
+            )
+            with(sessionAutomatica.edit()) {
+                clear()
+                apply()
+            }
+
+            Toast.makeText(this@MapaActivity, "Sessão Terminada!", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(this@MapaActivity, Login::class.java)
+            startActivity(intent)
+            finish()
+        }
 
     }
 
@@ -125,6 +151,7 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         // 2
         map.addMarker(markerOptions)
     }
+
 
 
 }

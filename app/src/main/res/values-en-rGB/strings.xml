@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CMApp</string>
     <string name="welcome">Welcome!</string>
     <string name="login">Login</string>
     <string name="entrar">Enter</string>
@@ -22,4 +21,5 @@
     <string name="eliminadoSucesso">Successfully deleted!</string>
     <string name="alteradoSucesso">Successfully changed!</string>
     <string name="adcionadoSucesso">Successfully added!</string>
+    <string name="logado">logado</string>
 </resources>
