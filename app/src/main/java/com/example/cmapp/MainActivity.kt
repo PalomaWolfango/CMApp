@@ -1,31 +1,39 @@
 package com.example.cmapp
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.os.Handler
+import android.os.Looper
 
 class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
 
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_main)
+            supportActionBar?.hide()
 
-    //Botão para aceder às notas
-    fun btnIrNotas(view: View) {
-        val intent = Intent(this, Lista_Notas::class.java).apply {}
-        startActivity(intent)
-    }
+            val sessionAutomatica: SharedPreferences = getSharedPreferences(
+                getString(R.string.SP),
+                Context.MODE_PRIVATE
+            )
 
-    fun semRegisto(view: View) {
-        val intent = Intent(this, Registo::class.java).apply {}
-        startActivity(intent)
-    }
-
-    fun Entrar(view: View) {
-        val intent = Intent(this, MapaActivity::class.java).apply {}
-        startActivity(intent)
-    }
-
+            //Página inicial do Delay
+            Handler(Looper.getMainLooper()).postDelayed({
+                //Verificação se o user estiver logado, através do SP
+                if (sessionAutomatica.getBoolean(getString(R.string.logado), false)) {
+                    val intent = Intent(this@MainActivity, MapaActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                else{
+                    val intent = Intent(this@MainActivity, Login::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            },900)
+        }
 }
+
