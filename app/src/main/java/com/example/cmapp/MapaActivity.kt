@@ -20,8 +20,15 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import android.util.Log
 import android.widget.Toast
+import com.example.cmapp.api.EndPoints
+import com.example.cmapp.api.Markers
+import com.example.cmapp.api.ServiceBuilder
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -46,6 +53,42 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         mapFragment.getMapAsync(this)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        val sessionAutomatica: SharedPreferences = getSharedPreferences(
+            getString(R.string.SP),
+            Context.MODE_PRIVATE
+        )
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.obterTodasAnomalias()
+
+        //Apresentação do marcador conforme o user que está logado
+        call.enqueue(object : Callback<List<Markers>> {
+            override fun onResponse(call: Call<List<Markers>>, response: Response<List<Markers>>) {
+                if (response.isSuccessful) {
+                    val anomalia = response.body()!!
+
+                    for(i in anomalia){
+                        val latlong = LatLng(i.lat,i.long)
+
+                        if(i.login_id.equals(sessionAutomatica.all[getString(R.string.id)])) {
+                            map.addMarker(MarkerOptions()
+                                .position(latlong)
+                                .title(i.titulo)
+                                .snippet(i.descricao)
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+                        }else{
+                            map.addMarker(MarkerOptions()
+                                .position(latlong)
+                                .title(i.titulo)
+                                .snippet(i.descricao))
+                        }
+                    }
+                }
+            }
+            override fun onFailure(call: Call<List<Markers>>, t: Throwable) {
+
+            }
+        })
 
         //Botão de terminar sessão
         val terminarSessao = findViewById<FloatingActionButton>(R.id.terminarSessao)
@@ -133,16 +176,6 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         }
 
         map.isMyLocationEnabled = true
-
-        fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
-            // Got last known location. In some rare situations this can be null.
-            if (location != null) {
-                lastLocation = location
-                val currentLatLng = LatLng(location.latitude, location.longitude)
-                placeMarkerOnMap(currentLatLng)
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
-            }
-        }
     }
 
     private fun placeMarkerOnMap(location: LatLng) {
