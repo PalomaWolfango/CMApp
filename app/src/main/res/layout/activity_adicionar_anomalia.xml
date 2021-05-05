@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbarThumbVertical="@color/Primary">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:scrollbarThumbVertical="@color/Primary"
+        android:scrollbars="vertical"
+        tools:context=".AdicionarAnomalia">
+
+        <EditText
+            android:id="@+id/edtxtTituloAnomalia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:ems="14"
+            android:hint="@string/title"
+            android:inputType="text"
+            android:textAllCaps="true"
+            android:textColor="@color/Primary"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtTipoAnomalia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtxtTituloAnomalia"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/tipo"
+            android:textAllCaps="true"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTipoAnomalia"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="40dp"
+            android:outlineAmbientShadowColor="@color/Primary"
+            android:outlineSpotShadowColor="@color/Primary" />
+
+
+        <TextView
+            android:id="@+id/txtDescriçãoAnomalia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/radioGroup"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/description"
+            android:textAllCaps="true"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edtxtDescriçãoAnomalia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDescriçãoAnomalia"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/border"
+            android:gravity="start"
+            android:inputType="textMultiLine|textImeMultiLine"
+            android:lines="10"
+            android:overScrollMode="always"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="false"
+            android:textAlignment="textStart" />
+
+        <TextView
+            android:id="@+id/txtfotografiaAnomalia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtxtDescriçãoAnomalia"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/fotografia"
+            android:textAllCaps="true"
+            android:textSize="18sp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addFotogrfia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtfotografiaAnomalia"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
+            android:clickable="true"
+            app:backgroundTint="@color/white"
+            app:srcCompat="@drawable/ic_baseline_add_circle_outline_24"
+            tools:ignore="VectorDrawableCompat" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addFotogrfia"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnGuardarAnomalia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:text="@string/guardarAnomalia"
+                app:backgroundTint="@color/Secondary"
+                android:layout_marginBottom="20dp"/>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

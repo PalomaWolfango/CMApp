@@ -16,7 +16,7 @@
     tools:context=".MapaActivity" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/eliminarNotas"
+        android:id="@+id/adicionarAnomalia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -38,4 +38,19 @@
         android:layout_above="@+id/eliminarNotas"
         android:layout_marginBottom="100dp"
         android:layout_marginLeft="30dp"/>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/border"
+        android:gravity="center" />
+
+
 </RelativeLayout>

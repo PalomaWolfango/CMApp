@@ -2,6 +2,7 @@ package com.example.cmapp
 
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -19,6 +20,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import android.util.Log
+import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.RelativeLayout
 import android.widget.Toast
 import com.example.cmapp.api.EndPoints
 import com.example.cmapp.api.Markers
@@ -39,9 +44,12 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
 
+    private var results = FloatArray(1)
+
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var lastLocation: Location
 
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mapa)
@@ -54,41 +62,47 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        val sessionAutomatica: SharedPreferences = getSharedPreferences(
-            getString(R.string.SP),
-            Context.MODE_PRIVATE
-        )
-        val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.obterTodasAnomalias()
+        val relativeLayout = findViewById<RelativeLayout>(R.id.relativeLayout)
 
-        //Apresentação do marcador conforme o user que está logado
-        call.enqueue(object : Callback<List<Markers>> {
-            override fun onResponse(call: Call<List<Markers>>, response: Response<List<Markers>>) {
-                if (response.isSuccessful) {
-                    val anomalia = response.body()!!
+        val posicao0 = RadioButton(this)
+        posicao0.layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        posicao0.setText(getString(R.string.buraco))
+        posicao0.id = 0
 
-                    for(i in anomalia){
-                        val latlong = LatLng(i.lat,i.long)
+        val posicao1 = RadioButton(this)
+        posicao1.layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        posicao1.setText(getString(R.string.obras))
+        posicao1.id = 1
 
-                        if(i.login_id.equals(sessionAutomatica.all[getString(R.string.id)])) {
-                            map.addMarker(MarkerOptions()
-                                .position(latlong)
-                                .title(i.titulo)
-                                .snippet(i.descricao)
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
-                        }else{
-                            map.addMarker(MarkerOptions()
-                                .position(latlong)
-                                .title(i.titulo)
-                                .snippet(i.descricao))
-                        }
-                    }
-                }
+        val posicao2 = RadioButton(this)
+        posicao2.layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        posicao2.setText(getString(R.string.transito))
+        posicao2.id = 2
+
+        val posicao3 = RadioButton(this)
+        posicao3.layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        posicao3.setText(getString(R.string.todos))
+        posicao3.id = 3
+
+        val radioGroup = RadioGroup(this)
+        val params = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        params.setMargins(20, 0, 0, 0)
+        radioGroup.layoutParams = params
+
+        radioGroup.addView(posicao0)
+        radioGroup.addView(posicao1)
+        radioGroup.addView(posicao2)
+        radioGroup.addView(posicao3)
+        relativeLayout.addView(radioGroup)
+
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId){
+                0 -> getBuraco()
+                1 -> getObras()
+                2 -> getTransito()
+                3 -> onMapReady(map)
             }
-            override fun onFailure(call: Call<List<Markers>>, t: Throwable) {
-
-            }
-        })
+        }
 
         //Botão de terminar sessão
         val terminarSessao = findViewById<FloatingActionButton>(R.id.terminarSessao)
@@ -108,6 +122,13 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             val intent = Intent(this@MapaActivity, Login::class.java)
             startActivity(intent)
             finish()
+        }
+
+        //Fab
+        val fab = findViewById<FloatingActionButton>(R.id.adicionarAnomalia)
+        fab.setOnClickListener {
+            val intent = Intent(this@MapaActivity, AdicionarAnomalia::class.java)
+            startActivity(intent)
         }
 
     }
@@ -163,6 +184,41 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             }
         }
 
+        val sessionAutomatica: SharedPreferences = getSharedPreferences(
+            getString(R.string.SP),
+            Context.MODE_PRIVATE
+        )
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.obterTodasAnomalias()
+
+        //Apresentação dos marcadores conforme o user que está logado
+        call.enqueue(object : Callback<List<Markers>> {
+            override fun onResponse(call: Call<List<Markers>>, response: Response<List<Markers>>) {
+                if (response.isSuccessful) {
+                    val anomalia = response.body()!!
+
+                    for(i in anomalia){
+                        val latlong = LatLng(i.latitude,i.longitude)
+
+                        if(i.login_id.equals(sessionAutomatica.all[getString(R.string.id)])) {
+                            map.addMarker(MarkerOptions()
+                                .position(latlong)
+                                .title(i.titulo)
+                                .snippet(i.descricao)
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+                        }else{
+                            map.addMarker(MarkerOptions()
+                                .position(latlong)
+                                .title(i.titulo)
+                                .snippet(i.descricao))
+                        }
+                    }
+                }
+            }
+            override fun onFailure(call: Call<List<Markers>>, t: Throwable) {
+            }
+        })
+
     }
 
     override fun onMarkerClick(p0: Marker?) = false
@@ -185,6 +241,170 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         map.addMarker(markerOptions)
     }
 
+    //Função para obter as anomalias com o tipo "Buraco"
+    fun getBuraco() {
+        if (ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
+            return
+        } else {
+            fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+                if (location != null) {
+                    lastLocation = location
+
+                    map.clear()
+
+                    val request = ServiceBuilder.buildService(EndPoints::class.java)
+                    val call = request.obterAnomaliasTipo(tipo = "Buraco")
+                    var position: LatLng
+
+                    val sessionAutomatica: SharedPreferences = getSharedPreferences(
+                        getString(R.string.SP), Context.MODE_PRIVATE
+                    )
+
+                    call.enqueue(object : Callback<List<Markers>> {
+                        override fun onResponse(call: Call<List<Markers>>, response: Response<List<Markers>>) {
+
+                            if (response.isSuccessful) {
+
+                                val anomalias = response.body()!!
+                                for (anomalia in anomalias) {
+                                    val latlong = LatLng(anomalia.latitude, anomalia.longitude)
+
+                                    if (anomalia.login_id.equals(sessionAutomatica.all[getString(R.string.id)])) {
+                                        map.addMarker(MarkerOptions()
+                                            .position(latlong)
+                                            .title(anomalia.titulo)
+                                            .snippet(anomalia.descricao)
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)))
+
+                                    } else {
+                                        map.addMarker(MarkerOptions().position(latlong).title(anomalia.titulo).snippet(anomalia.descricao))
+                                    }
+                                }
+                            }
+                        }
+                        override fun onFailure(call: Call<List<Markers>>, t: Throwable) {
+                            Toast.makeText(this@MapaActivity, getString(R.string.app_name), Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                }
+            }
+        }
+    }
+
+    //Função para obter as anomalias com o tipo "Obras"
+    fun getObras() {
+        if (ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
+            return
+        } else {
+            fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+                if (location != null) {
+                    lastLocation = location
+
+                    map.clear()
+
+                    val request = ServiceBuilder.buildService(EndPoints::class.java)
+                    val call = request.obterAnomaliasTipo(tipo = "Obras")
+                    var position: LatLng
+
+                    val sessionAutomatica: SharedPreferences = getSharedPreferences(
+                        getString(R.string.SP), Context.MODE_PRIVATE
+                    )
+
+                    call.enqueue(object : Callback<List<Markers>> {
+                        override fun onResponse(call: Call<List<Markers>>, response: Response<List<Markers>>) {
+
+                            if (response.isSuccessful) {
+
+                                val anomalias = response.body()!!
+
+                                for (anomalia in anomalias) {
+                                    val latlong = LatLng(anomalia.latitude, anomalia.longitude)
+
+                                    if (anomalia.login_id.equals(sessionAutomatica.all[getString(R.string.id)])) {
+
+                                        map.addMarker(MarkerOptions()
+                                            .position(latlong)
+                                            .title(anomalia.titulo)
+                                            .snippet(anomalia.descricao)
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+
+                                    } else {
+                                        map.addMarker(MarkerOptions().position(latlong).title(anomalia.titulo).snippet(anomalia.descricao))
+                                    }
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<List<Markers>>, t: Throwable) {
+                            Toast.makeText(this@MapaActivity, getString(R.string.app_name), Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                }
+            }
+        }
+    }
+
+    //Função para obter as anomalias com o tipo "Trânsito"
+    fun getTransito() {
+        if (ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
+            return
+        } else {
+            fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+                if (location != null) {
+                    lastLocation = location
+
+                    map.clear()
+
+                    val request = ServiceBuilder.buildService(EndPoints::class.java)
+                    val call = request.obterAnomaliasTipo(tipo = "Trânsito")
+                    var position: LatLng
+
+                    val sessionAutomatica: SharedPreferences = getSharedPreferences(
+                        getString(R.string.SP), Context.MODE_PRIVATE
+                    )
+
+                    call.enqueue(object : Callback<List<Markers>> {
+                        override fun onResponse(call: Call<List<Markers>>, response: Response<List<Markers>>) {
+
+                            if (response.isSuccessful) {
+
+                                val anomalias = response.body()!!
+
+                                for (anomalia in anomalias) {
+                                    val latlong = LatLng(anomalia.latitude, anomalia.longitude)
+
+                                    if (anomalia.login_id.equals(sessionAutomatica.all[getString(R.string.id)])) {
+
+                                        map.addMarker(MarkerOptions()
+                                            .position(latlong)
+                                            .title(anomalia.titulo)
+                                            .snippet(anomalia.descricao)
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
+
+                                    } else {
+                                        map.addMarker(MarkerOptions().position(latlong).title(anomalia.titulo).snippet(anomalia.descricao))
+                                    }
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<List<Markers>>, t: Throwable) {
+                            Toast.makeText(this@MapaActivity, getString(R.string.app_name), Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                }
+            }
+        }
+    }
 
 
 }

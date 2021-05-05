@@ -26,4 +26,12 @@
     <string name="erroPassword">Invalid Password</string>
     <string name="sessaoTerminada">Logged Out!</string>
     <string name="loginIncorreto">Incorrect Login!</string>
+    <string name="guardarAnomalia">Save Anomaly</string>
+    <string name="fotografia">Photography</string>
+    <string name="tipo">Type</string>
+    <string name="eliminarAnomalia">Delete Anomaly</string>
+    <string name="obras">Constructions</string>
+    <string name="transito">Traffic</string>
+    <string name="buraco">Holes</string>
+    <string name="todos">All</string>
 </resources>

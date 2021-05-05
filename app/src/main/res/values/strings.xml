@@ -30,6 +30,13 @@
     <string name="erroPassword">Password Inválida</string>
     <string name="sessaoTerminada">Sessão Terminada!</string>
     <string name="loginIncorreto">Login Incorreto!</string>
-
+    <string name="guardarAnomalia">Guardar Anomalia</string>
+    <string name="fotografia">Fotografia</string>
+    <string name="tipo">Tipo</string>
+    <string name="eliminarAnomalia">Elminar Anomalia</string>
+    <string name="obras">Obras</string>
+    <string name="transito">Trânsito</string>
+    <string name="buraco">Buraco</string>
+    <string name="todos">Todos</string>
 
 </resources>
