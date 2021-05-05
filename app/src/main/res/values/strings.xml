@@ -38,5 +38,11 @@
     <string name="transito">Trânsito</string>
     <string name="buraco">Buraco</string>
     <string name="todos">Todos</string>
+    //Array para o spinner
+    <string-array name="array">
+        <item>Buraco</item>
+        <item>Obras</item>
+        <item>Trânsito</item>
+    </string-array>
 
 </resources>

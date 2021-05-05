@@ -40,22 +40,21 @@
             android:textAllCaps="true"
             android:textSize="18sp" />
 
-        <RadioGroup
-            android:id="@+id/radioGroup"
+        <Spinner
+            android:id="@+id/spinnerItems"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtTipoAnomalia"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="40dp"
-            android:outlineAmbientShadowColor="@color/Primary"
-            android:outlineSpotShadowColor="@color/Primary" />
+            android:layout_marginTop="20dp"
+            android:foregroundTint="@color/Primary"/>
 
 
         <TextView
             android:id="@+id/txtDescriçãoAnomalia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/radioGroup"
+            android:layout_below="@+id/spinnerItems"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="40dp"
             android:text="@string/description"
