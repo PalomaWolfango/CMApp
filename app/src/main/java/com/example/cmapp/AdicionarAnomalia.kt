@@ -46,18 +46,18 @@ class AdicionarAnomalia : AppCompatActivity() {
         //Botão de adicionar uma nova anomalia
         val btnGuardarAnomalia = findViewById<Button>(R.id.btnGuardarAnomalia)
         btnGuardarAnomalia.setOnClickListener {
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    android.Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
 
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(
                     this,
                     arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1
                 )
+
                 return@setOnClickListener
-            } else {
+
+            }
+            else {
                 fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
                     if (location != null) {
                         lastLocation = location
@@ -66,8 +66,7 @@ class AdicionarAnomalia : AppCompatActivity() {
 
                         val sessionAutomatica: SharedPreferences = getSharedPreferences(
                             getString(R.string.SP),
-                            Context.MODE_PRIVATE
-                        )
+                            Context.MODE_PRIVATE)
 
                         var id: Int? = 0
                         id = sessionAutomatica.all[getString(R.string.id)] as Int?
@@ -95,29 +94,35 @@ class AdicionarAnomalia : AppCompatActivity() {
                             spinnerVal
                         )
 
+                        //Verificação se os campos são preenchidos
+                        if(edTxtTitulo.text.isNullOrEmpty() || edTxtDescricao.text.isNullOrEmpty()){
 
-                        call.enqueue(object : Callback<Markers> {
-                            override fun onResponse(
-                                call: Call<Markers>,
-                                response: Response<Markers>
-                            ) {
-                                if (response.isSuccessful) {
-                                    Toast.makeText(
-                                        this@AdicionarAnomalia,
-                                        getString(R.string.adcionadoSucesso),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                            if(edTxtTitulo.text.isNullOrEmpty() && !edTxtDescricao.text.isNullOrEmpty()){
+                                edTxtTitulo.error = getString(R.string.erroUsername)
+                            }
+                            if(!edTxtTitulo.text.isNullOrEmpty() && edTxtDescricao.text.isNullOrEmpty()){
+                                edTxtDescricao.error = getString(R.string.erroPassword)
+                            }
+                            if(edTxtTitulo.text.isNullOrEmpty() && edTxtDescricao.text.isNullOrEmpty()){
+                                edTxtTitulo.error = getString(R.string.erroUsername)
+                                edTxtDescricao.error = getString(R.string.erroPassword)
+                            }
+                        }
+                        else {
+                            call.enqueue(object : Callback<Markers> {
+                                override fun onResponse(call: Call<Markers>, response: Response<Markers>) {
+                                    if (response.isSuccessful) {
+                                        Toast.makeText(this@AdicionarAnomalia, getString(R.string.adcionadoSucesso), Toast.LENGTH_SHORT).show()
+                                    }
+                                        val intent = Intent(this@AdicionarAnomalia, MapaActivity::class.java)
+                                        startActivity(intent)
+                                        finish()
+                                    }
+                                override fun onFailure(call: Call<Markers>?, t: Throwable?) {
+                                    Toast.makeText(applicationContext, t!!.message, Toast.LENGTH_SHORT).show()
                                 }
-                                val intent =
-                                    Intent(this@AdicionarAnomalia, MapaActivity::class.java)
-                                startActivity(intent)
-                                finish()
-                            }
-
-                            override fun onFailure(call: Call<Markers>?, t: Throwable?) {
-                                Toast.makeText(applicationContext, t!!.message, Toast.LENGTH_SHORT).show()
-                            }
-                        })
+                            })
+                        }
                     }
                 }
             }
