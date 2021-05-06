@@ -1,6 +1,6 @@
 package com.example.cmapp.api
 
-//data class dos markers
+//data class dos Markers
 data class Markers(
     val id: Int,
     val titulo: String,
