@@ -32,17 +32,6 @@ class SensoresActivity : AppCompatActivity(), SensorEventListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sensores)
 
-        /*val sessionAutomatica: SharedPreferences = getSharedPreferences(
-            getString(R.string.SP), Context.MODE_PRIVATE
-        )
-        if (sessionAutomatica != null){
-            if(sessionAutomatica.all[getString(R.string.id)]==true){
-                var intent = Intent(this, MapaActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-        }*/
-
         //Sensor da luminosidade
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_LIGHT)
