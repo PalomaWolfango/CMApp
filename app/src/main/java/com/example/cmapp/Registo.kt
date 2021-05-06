@@ -11,6 +11,7 @@ class Registo : AppCompatActivity() {
         setContentView(R.layout.activity_registo)
     }
 
+    //IR para o login
     fun irLogin(view: View) {
         val intent = Intent(this, MainActivity::class.java).apply {}
         startActivity(intent)
