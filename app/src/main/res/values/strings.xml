@@ -44,5 +44,9 @@
         <item>Obras</item>
         <item>Trânsito</item>
     </string-array>
+    <string name="metros">metros</string>
+    <string name="erro">Erro!</string>
+    <string name="distancia">Distância</string>
+    <string name="nenhuma">Nenhuma</string>
 
 </resources>

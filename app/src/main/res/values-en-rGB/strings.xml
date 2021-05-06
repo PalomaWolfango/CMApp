@@ -34,4 +34,8 @@
     <string name="transito">Traffic</string>
     <string name="buraco">Holes</string>
     <string name="todos">All</string>
+    <string name="metros">meters</string>
+    <string name="erro">Error!</string>
+    <string name="distancia">Distance</string>
+    <string name="nenhuma">None</string>
 </resources>

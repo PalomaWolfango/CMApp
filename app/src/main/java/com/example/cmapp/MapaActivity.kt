@@ -34,6 +34,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.roundToInt
 
 
 class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -62,8 +63,8 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        //FILTROS POR TIPO DE ANOMALIA (RADIOGROUP)
         val relativeLayout = findViewById<RelativeLayout>(R.id.relativeLayout)
-
         val posicao0 = RadioButton(this)
         posicao0.layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         posicao0.setText(getString(R.string.buraco))
@@ -100,6 +101,48 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                 0 -> getBuraco()
                 1 -> getObras()
                 2 -> getTransito()
+                3 -> onMapReady(map)
+            }
+        }
+
+        //FILTROS POR DISTÂNCIA
+        val relativeLayout2 = findViewById<RelativeLayout>(R.id.relativeLayout2)
+        val distancia500 = RadioButton(this)
+        distancia500.layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        distancia500.setText("500m")
+        distancia500.id = 0
+
+        val distancia1000 = RadioButton(this)
+        distancia1000.layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        distancia1000.setText("1000m")
+        distancia1000.id = 1
+
+        val distancia1500 = RadioButton(this)
+        distancia1500.layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        distancia1500.setText("1500m")
+        distancia1500.id = 2
+
+        val nenhuma = RadioButton(this)
+        nenhuma.layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        nenhuma.setText(getString(R.string.nenhuma))
+        nenhuma.id = 3
+
+        val radioGroup2 = RadioGroup(this)
+        val params2 = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        params2.setMargins(20, 0, 0, 0)
+        radioGroup.layoutParams = params2
+
+        radioGroup2.addView(distancia500)
+        radioGroup2.addView(distancia1000)
+        radioGroup2.addView(distancia1500)
+        radioGroup2.addView(nenhuma)
+        relativeLayout2.addView(radioGroup2)
+
+        radioGroup2.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId){
+                0 -> getFiltroDistancia500()
+                1 -> getFiltroDistancia1000()
+                2 -> getFiltroDistancia1500()
                 3 -> onMapReady(map)
             }
         }
@@ -391,7 +434,10 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
 
                                     } else {
-                                        map.addMarker(MarkerOptions().position(latlong).title(anomalia.titulo).snippet(anomalia.descricao))
+                                        map.addMarker(MarkerOptions()
+                                            .position(latlong)
+                                            .title(anomalia.titulo)
+                                            .snippet(anomalia.descricao))
                                     }
                                 }
                             }
@@ -406,5 +452,144 @@ class MapaActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         }
     }
 
+    //Cálculo da distância
+    fun calcularDistancia(latitude: Double, longitude: Double, latitude2: Double, longitude2: Double): Float {
+        Location.distanceBetween(latitude, longitude, latitude2, longitude2, results)
+        return results[0]
+    }
+
+    //Distância até 500m
+    fun getFiltroDistancia500() {
+        if (ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
+            return
+        } else {
+            fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+                if (location != null) {
+                    lastLocation = location
+                    map.clear()
+
+                    val request = ServiceBuilder.buildService(EndPoints::class.java)
+                    val call = request.obterTodasAnomalias()
+                    var position: LatLng
+
+                    call.enqueue(object : Callback<List<Markers>> {
+                        override fun onResponse(call: Call<List<Markers>>, response: Response<List<Markers>>) {
+                            if (response.isSuccessful) {
+                                val anomalias = response.body()!!
+                                for (anomalia in anomalias) {
+                                    position = LatLng(anomalia.latitude, anomalia.longitude)
+
+                                    if (calcularDistancia(location.latitude, location.longitude, anomalia.latitude, anomalia.longitude) <= 500) {
+                                        map.addMarker(MarkerOptions()
+                                            .position(position)
+                                            .title(anomalia.titulo)
+                                            .snippet(getString(R.string.distancia)+ ": " + results[0].roundToInt() + getString(R.string.metros))
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)))
+                                    }
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<List<Markers>>, t: Throwable) {
+                            Toast.makeText(this@MapaActivity, getString(R.string.erro), Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                }
+            }
+        }
+    }
+
+    //Distância até 1000m
+    fun getFiltroDistancia1000() {
+        if (ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
+            return
+        } else {
+            fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+                if (location != null) {
+                    lastLocation = location
+                    map.clear()
+
+                    val request = ServiceBuilder.buildService(EndPoints::class.java)
+                    val call = request.obterTodasAnomalias()
+                    var position: LatLng
+
+                    call.enqueue(object : Callback<List<Markers>> {
+                        override fun onResponse(call: Call<List<Markers>>, response: Response<List<Markers>>) {
+
+                            if (response.isSuccessful) {
+                                val anomalias = response.body()!!
+                                for (anomalia in anomalias) {
+                                    position = LatLng(anomalia.latitude, anomalia.longitude)
+
+                                    if (calcularDistancia(location.latitude, location.longitude, anomalia.latitude, anomalia.longitude) <= 1000) {
+                                        map.addMarker(MarkerOptions()
+                                            .position(position)
+                                            .title(anomalia.titulo)
+                                            .snippet(getString(R.string.distancia)+ ": " + results[0].roundToInt() + getString(R.string.metros))
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                                    }
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<List<Markers>>, t: Throwable) {
+                            Toast.makeText(this@MapaActivity, getString(R.string.erro), Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                }
+            }
+        }
+    }
+
+    //Distância até 1000m
+    fun getFiltroDistancia1500() {
+        if (ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
+            return
+        } else {
+            fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+                if (location != null) {
+                    lastLocation = location
+                    map.clear()
+
+                    val request = ServiceBuilder.buildService(EndPoints::class.java)
+                    val call = request.obterTodasAnomalias()
+                    var position: LatLng
+
+                    call.enqueue(object : Callback<List<Markers>> {
+                        override fun onResponse(call: Call<List<Markers>>, response: Response<List<Markers>>) {
+
+                            if (response.isSuccessful) {
+                                val anomalias = response.body()!!
+                                for (anomalia in anomalias) {
+                                    position = LatLng(anomalia.latitude, anomalia.longitude)
+
+                                    if (calcularDistancia(location.latitude, location.longitude, anomalia.latitude, anomalia.longitude) <= 1500) {
+                                        map.addMarker(MarkerOptions()
+                                            .position(position)
+                                            .title(anomalia.titulo)
+                                            .snippet(getString(R.string.distancia)+ ": " + results[0].roundToInt() + getString(R.string.metros))
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
+                                    }
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<List<Markers>>, t: Throwable) {
+                            Toast.makeText(this@MapaActivity, getString(R.string.erro), Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                }
+            }
+        }
+    }
 
 }
