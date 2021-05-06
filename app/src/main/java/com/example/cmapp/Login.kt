@@ -95,4 +95,9 @@ class Login : AppCompatActivity() {
         val intent = Intent(this, Registo::class.java).apply {}
         startActivity(intent)
     }
+
+    fun btnIrSensores(view: View) {
+        val intent = Intent(this, SensoresActivity::class.java).apply {}
+        startActivity(intent)
+    }
 }

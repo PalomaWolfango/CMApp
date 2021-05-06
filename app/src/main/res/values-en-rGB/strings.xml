@@ -38,4 +38,6 @@
     <string name="erro">Error!</string>
     <string name="distancia">Distance</string>
     <string name="nenhuma">None</string>
+    <string name="caima_baixo">Up/Down</string>
+    <string name="esquerda_direita">Left/Right</string>
 </resources>

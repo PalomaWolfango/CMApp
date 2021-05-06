@@ -48,5 +48,7 @@
     <string name="erro">Erro!</string>
     <string name="distancia">Distância</string>
     <string name="nenhuma">Nenhuma</string>
+    <string name="caima_baixo">Cima/Baixo</string>
+    <string name="esquerda_direita">Esquerda/Direita</string>
 
 </resources>

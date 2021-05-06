@@ -84,6 +84,7 @@ class AdicionarAnomalia : AppCompatActivity() {
                         val spinnerVal = spinnerAnomalia.selectedItem.toString()
 
                         val request = ServiceBuilder.buildService(EndPoints::class.java)
+                        //INSERIR A ANOMALIA
                         val call = request.inserirAnomalia(
                             titulo,
                             descricao,

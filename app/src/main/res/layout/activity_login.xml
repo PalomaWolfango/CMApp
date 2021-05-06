@@ -87,4 +87,21 @@
         tools:ignore="VectorDrawableCompat"
         app:srcCompat="@drawable/ic_notes"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnsensores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="100dp"
+        android:clickable="true"
+        android:onClick="btnIrSensores"
+        app:srcCompat="@drawable/ic_baseline_contactless_24"
+        tools:ignore="VectorDrawableCompat"/>
+
 </RelativeLayout>
