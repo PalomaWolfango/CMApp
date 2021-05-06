@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CMApp">
-        <activity android:name=".EditarAnomalia"></activity>
+        <activity android:name=".SensoresActivity"></activity>
+        <activity android:name=".EditarAnomalia" />
         <activity android:name=".AdicionarAnomalia" />
         <activity android:name=".Login" />
         <!--
