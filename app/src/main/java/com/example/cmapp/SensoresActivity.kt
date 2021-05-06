@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import kotlinx.android.synthetic.main.activity_sensores.*
 import java.io.IOException
 
-//Atividade Sensores
+//Atividade Sensores (Acelerometro e Luminosidade)
 class SensoresActivity : AppCompatActivity(), SensorEventListener {
 
     private lateinit var txtAcelerometro: TextView
