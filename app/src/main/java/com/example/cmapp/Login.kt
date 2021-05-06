@@ -20,6 +20,7 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        supportActionBar?.hide()
 
         //Botão após o login, direciona-nos para o mapa
         val entrar = findViewById<Button>(R.id.btnLogin)
