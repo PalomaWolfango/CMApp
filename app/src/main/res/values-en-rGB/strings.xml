@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CMApp</string>
     <string name="welcome">Welcome!</string>
     <string name="login">Login</string>
     <string name="entrar">Enter</string>
@@ -22,4 +21,23 @@
     <string name="eliminadoSucesso">Successfully deleted!</string>
     <string name="alteradoSucesso">Successfully changed!</string>
     <string name="adcionadoSucesso">Successfully added!</string>
+    <string name="logado">logado</string>
+    <string name="erroUsername">Invalid Username</string>
+    <string name="erroPassword">Invalid Password</string>
+    <string name="sessaoTerminada">Logged Out!</string>
+    <string name="loginIncorreto">Incorrect Login!</string>
+    <string name="guardarAnomalia">Save Anomaly</string>
+    <string name="fotografia">Photography</string>
+    <string name="tipo">Type</string>
+    <string name="eliminarAnomalia">Delete Anomaly</string>
+    <string name="obras">Constructions</string>
+    <string name="transito">Traffic</string>
+    <string name="buraco">Holes</string>
+    <string name="todos">All</string>
+    <string name="metros">meters</string>
+    <string name="erro">Error!</string>
+    <string name="distancia">Distance</string>
+    <string name="nenhuma">None</string>
+    <string name="caima_baixo">Up/Down</string>
+    <string name="esquerda_direita">Left/Right</string>
 </resources>

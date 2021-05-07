@@ -10,7 +10,7 @@ object ServiceBuilder {
 
     //retrofit
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://tp1cm.000webhostapp.com/myslim/")
+        .baseUrl("https://tp1cm.000webhostapp.com/myslim/api/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()

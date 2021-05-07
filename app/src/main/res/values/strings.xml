@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CMApp</string>
+    <string name="app_name" translatable="false">CMApp</string>
     <string name="welcome">Bem-vindo!</string>
     <string name="login">Login</string>
     <string name="entrar">Entrar</string>
@@ -21,6 +21,34 @@
     <string name="eliminadoSucesso">Eliminado com sucesso!</string>
     <string name="alteradoSucesso">Alterado com sucesso!</string>
     <string name="adcionadoSucesso">Adicionada com sucesso!</string>
-    <string name="title_activity_mapa">Map</string>
+    <string name="title_activity_mapa" translatable="false">Map</string>
+    <string name="SP" translatable="false">SharedPreferences</string>
+    <string name="logado">logged</string>
+    <string name="username" translatable="false">username</string>
+    <string name="id" translatable="false">id</string>
+    <string name="erroUsername">Username inválido</string>
+    <string name="erroPassword">Password Inválida</string>
+    <string name="sessaoTerminada">Sessão Terminada!</string>
+    <string name="loginIncorreto">Login Incorreto!</string>
+    <string name="guardarAnomalia">Guardar Anomalia</string>
+    <string name="fotografia">Fotografia</string>
+    <string name="tipo">Tipo</string>
+    <string name="eliminarAnomalia">Elminar Anomalia</string>
+    <string name="obras">Obras</string>
+    <string name="transito">Trânsito</string>
+    <string name="buraco">Buraco</string>
+    <string name="todos">Todos</string>
+    //Array para o spinner
+    <string-array name="array">
+        <item>Buraco</item>
+        <item>Obras</item>
+        <item>Trânsito</item>
+    </string-array>
+    <string name="metros">metros</string>
+    <string name="erro">Erro!</string>
+    <string name="distancia">Distância</string>
+    <string name="nenhuma">Nenhuma</string>
+    <string name="caima_baixo">Cima/Baixo</string>
+    <string name="esquerda_direita">Esquerda/Direita</string>
 
 </resources>
