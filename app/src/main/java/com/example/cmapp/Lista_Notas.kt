@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.lista_notas.*
 
 class Lista_Notas : AppCompatActivity() {
 
+    //Master commit
     private lateinit var notaViewModel: NotaViewModel
     private val newNotaActivityRequestCode = 1
 
